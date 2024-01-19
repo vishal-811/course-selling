@@ -1,7 +1,6 @@
 const jwt =require('jsonwebtoken');
 const jwt_secret ="hello";
 const zod =require('zod');
-
 // Middleware for handling auth
 function adminMiddleware(req, res, next) {
     // Implement admin auth logic
@@ -21,9 +20,13 @@ function adminMiddleware(req, res, next) {
 
 
 function emailpassSchema(req,res,next){
+    console.log(req.body);
     const {email,username, password} =req.body;
-    const emailSchema = zod.string().email();
+    console.log(email);
+    console.log(username);
+    console.log(password);
     const usernameSchema =zod.string();
+    const emailSchema = zod.string().email();
     const passwordSchema =zod.string().or(zod.number());
 
     try {

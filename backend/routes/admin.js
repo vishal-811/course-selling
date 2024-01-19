@@ -11,7 +11,6 @@ const jwt_secret =process.env.JWT_SECRET;
 router.post('/signup', emailpassSchema, async (req, res) => {
     // Implement admin signup logic
     const {email,username , password} =req.body;
-    
     try {
         const useremail =await Admin.findOne({email:email})
     if(useremail){
