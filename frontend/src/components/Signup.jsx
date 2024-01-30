@@ -1,5 +1,6 @@
 import {useState} from 'react'
 import axios from 'axios'
+import {Link} from 'react-router-dom'
 const Signup=()=>{
     const [username ,setUsername]=useState('');
     const [email,setEmail] =useState('');
@@ -53,9 +54,9 @@ const Signup=()=>{
        
 
 
-      <div className='flex flex-col justify-center items-center   bg-gray-800 w-screen h-screen'>
+      <div className="flex flex-col justify-center items-center  p-4 bg-gray-800 max-w-screen h-lvh">
       <h1 className='font-sans font-semibold text-3xl text-white mb-4'>Create Account</h1>
-      <form className='w-full max-w-sm'>
+      <form onSubmit={handlesubmit} className='w-full max-w-sm'>
           <div className='mb-4'>
               <input className='bg-gray-700 appearance-none border-2 border-gray-600 rounded w-full py-2 px-4 text-gray-200 leading-tight focus:outline-none focus:bg-gray-600 focus:border-gray-700' 
               type='text' 
@@ -92,7 +93,11 @@ const Signup=()=>{
           {/* Login if user already exist */}
            <div className='flex space-x-1 font-sans font-bold mt-2 p-2'>
                <p className='text-cyan-200'>Already have an AcademiaX account?</p>
-               <a className='text-white hover:text-blue-600 text-lg' href='https://www.google.com' >Sign In</a>
+               <Link className='text-white hover:text-blue-600 text-lg' to={'/signin'}>
+                  
+                  Sign In
+
+               </Link>
            </div>
   </div>   
     )
