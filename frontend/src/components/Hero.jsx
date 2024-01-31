@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Hero = () => {
   return (
-    <div className="w-full h-screen flex bg-custom-gray">
+    <div className="w-full h-screen flex bg-custom-gray z-1">
       {/* Left section */}
       <div className="w-2/3 h-full flex flex-col pt-24">
         <h1 className="p-14 text-5xl space-x-4 space-y-10 text-gray-800">

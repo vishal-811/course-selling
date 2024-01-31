@@ -1,15 +1,15 @@
-import Header from "./Header";
 import Role from  "./Role"
-import Signup from "./Signup";
 import Hero from "./Hero";
-import Signin from "./Signin";
+import Popup from "./Popup";
+
+
 const Home =()=>{
+  
     return(
         <>
         <div>
-                 {/* <Hero></Hero> */}
-                {/* <Role></Role> */}
-                <Signin/>
+                <Hero></Hero>
+                <Role></Role>
         </div>
 
         </>

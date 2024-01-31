@@ -1,11 +1,19 @@
 import {useState} from 'react'
 import axios from 'axios'
-import {Link} from 'react-router-dom'
+import {Link ,useSearchParams,useNavigate} from 'react-router-dom'
+
 const Signup=()=>{
     const [username ,setUsername]=useState('');
     const [email,setEmail] =useState('');
     const [password,setPassword]=useState("");
+     const [searchparams] =useSearchParams();
 
+     const navigate =useNavigate();
+
+     const userRole =searchparams.get('usertype');
+    
+    
+    //  console.log(searchparams)
       const setUserhandler=(e)=>{
         setUsername(e.target.value)  //e.target give us a object as an output.
       }
@@ -22,7 +30,7 @@ const Signup=()=>{
         e.preventDefault();  
        
          try {
-          const response =await axios.post("http://localhost:3000/user/signup",
+          const response =await axios.post(userRole==='user' ? "http://localhost:3000/user/signup"  : "http://localhost:3000/admin/signup" ,
             {
               username:username,
               email:email,
@@ -31,13 +39,16 @@ const Signup=()=>{
           {
               headers: { 'Content-Type': 'application/json' },
           });
-            console.log(response);
+            // console.log(response);
            if(response.status==201){
             console.log("successfully registered")
             // clearing the signup page
              setUsername('');
              setEmail('');
              setPassword('');
+ 
+              navigate(`/Signin?usertype=${userRole}`)
+
            }
            else{
             console.log(response.data.msg)
@@ -52,7 +63,8 @@ const Signup=()=>{
       }
     return(
        
-
+        <>
+           
 
       <div className="flex flex-col justify-center items-center  p-4 bg-gray-800 max-w-screen h-lvh">
       <h1 className='font-sans font-semibold text-3xl text-white mb-4'>Create Account</h1>
@@ -93,13 +105,14 @@ const Signup=()=>{
           {/* Login if user already exist */}
            <div className='flex space-x-1 font-sans font-bold mt-2 p-2'>
                <p className='text-cyan-200'>Already have an AcademiaX account?</p>
-               <Link className='text-white hover:text-blue-600 text-lg' to={'/signin'}>
+               <Link className='text-white hover:text-blue-600 text-lg' to={`/signin?usertype=${userRole}`}>
                   
                   Sign In
-
                </Link>
            </div>
-  </div>   
+  </div> 
+            
+  </> 
     )
 }
 

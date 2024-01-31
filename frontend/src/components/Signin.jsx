@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios'
+import { useNavigate, useSearchParams } from "react-router-dom";
+import {toast} from  'react-toastify'
 const Signin = () => {
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    
+    const [searchparams] =useSearchParams();
+    const userRole =searchparams.get('usertype');
+    const navigate =useNavigate();
+    toast();
         const handleSignin = async(e) => {
             // Handle sign-in logic here
             e.preventDefault();
     
            try {
-            const response =await axios.post("http://localhost:3000/user/signin",
+              const response =   await axios.post( userRole=='user' ?"http://localhost:3000/user/signin":"http://localhost:3000/admin/signin",
             {
                   username:username,
                   email:email,
@@ -20,14 +24,15 @@ const Signin = () => {
             {
                 headers: { 'Content-Type': 'application/json' },
             }
-            );
-            // console.log(response)
-            if(response.status==200){
+            ); 
+            if(response.status===200){
                 console.log("user signin successfully");
-                
+                navigate('/')
+                toast.success("Successfully Registerd")    
             }
+            
            } catch (error) {
-              console.error(error);
+              toast.error(error.response.data.msg);
            }
              
     
