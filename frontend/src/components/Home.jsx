@@ -1,6 +1,5 @@
 import Role from  "./Role"
 import Hero from "./Hero";
-import Popup from "./Popup";
 
 
 const Home =()=>{

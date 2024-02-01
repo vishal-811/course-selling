@@ -7,6 +7,7 @@ const Signin = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [searchparams] =useSearchParams();
+    // const [loggedin,setLoggedin]=useState(false);
     const userRole =searchparams.get('usertype');
     const navigate =useNavigate();
     toast();
@@ -25,10 +26,14 @@ const Signin = () => {
                 headers: { 'Content-Type': 'application/json' },
             }
             ); 
+            console.log(response.data.token);
             if(response.status===200){
+                localStorage.setItem('isLoggedIn', true);
+                localStorage.setItem('userType', userRole);
+                localStorage.setItem('token',response.data.token)
                 console.log("user signin successfully");
-                navigate('/')
-                toast.success("Successfully Registerd")    
+                navigate(`/?usertype=${userRole}`)
+                toast.success("Successfully Registerd")  
             }
             
            } catch (error) {

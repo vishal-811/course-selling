@@ -1,7 +1,13 @@
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useSearchParams} from "react-router-dom"
+import Profilebtn from "./Profilebtn";
 const Header =()=>{
-    const [usertype ,setUsertype] =useState('User')
+    const [searchparams]=useSearchParams();
+    const userType =searchparams.get('usertype');
+    const login =searchparams.get('login');
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    const userTypeFromStorage = localStorage.getItem('userType');
+   
     return(
         
       <div className="bg-gray-100">
@@ -16,15 +22,16 @@ const Header =()=>{
               <li><a href="/courses" className="px-4 py-2 font-semibold text-gray-600 rounded">Courses</a></li>
               <li><a href="#" className="px-4 py-2 font-semibold text-gray-600 rounded">About Us</a></li>
 
+              {isLoggedIn && userTypeFromStorage ? <Profilebtn userRole={userTypeFromStorage}/> :
               <div className="flex items-center">
                   <Link
-                    to={"/role"}
+                      to={"/role"}
                     type="button"
                     className="text-white bg-blue-700 hover:bg-blue-800  focus:ring-blue-600  md:font-medium  rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
                   >
-                    Profile
+                   Profile
                   </Link>
-                </div>
+                </div>}
             </ul>
 
             <div className="inline-flex md:hidden">
