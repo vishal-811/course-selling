@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link, useSearchParams} from "react-router-dom"
-import Profilebtn from "./Profilebtn";
+import Avatar from "./Avatar";
 const Header =()=>{
     const [searchparams]=useSearchParams();
     const userType =searchparams.get('usertype');
@@ -22,7 +22,7 @@ const Header =()=>{
               <li><a href="/courses" className="px-4 py-2 font-semibold text-gray-600 rounded">Courses</a></li>
               <li><a href="#" className="px-4 py-2 font-semibold text-gray-600 rounded">About Us</a></li>
 
-              {isLoggedIn && userTypeFromStorage ? <Profilebtn userRole={userTypeFromStorage}/> :
+              {isLoggedIn && userTypeFromStorage ? <Avatar userRole={userTypeFromStorage}/> :
               <div className="flex items-center">
                   <Link
                       to={"/role"}
